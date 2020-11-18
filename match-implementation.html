@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+	<script src="http://stemwijzer.dvc-icta.nl/data.js"></script>
 	<title>match answers</title>
 	<meta charset = "utf-8">
 </head>
@@ -51,14 +52,31 @@ answers = [
 ]
 
 function matchMealMate (){
+	//voegtoe en haal de scores weg(nummer van matcher) voor vrienden
+	//Herhaal door de antwoorden en bijbehoorende maaltijden
+		//per maaltijd herhalen door zijn vrienden
+			//als my-like voor deze maaltijd gelijk is aan de mealFriend antwoorden dan
+				//vind het overeenkomstige element in mates en verhoog de score
+			//sort mates score
+		for (let m = 0; m < meals.length; m++) {
+			for (let i = 1; i < mates.length; i++) {
+				if(meals[m]['mates'][0]['answer'] == meals[m]['mates'][i]['answer']){
+					console.log(mates[i]["name"]);
+					console.log(true);
+				}else{
+					console.log(mates[i]["name"]);
+					console.log(false);
+				}
+			}
+			console.log(m);
+		}
+
 	// add and clear scores (number of matches) for mates
 	// Iterate through answers and corresponding meals
 		// per meal iterate through its mates
 			// if my-like for this meal is equal to the mealFriend its answers then
 				// find corresponding element in mates en increment its score
 	// sort mates on score
-
-
 }
 
 // call the match function
@@ -66,11 +84,6 @@ matchMealMate();
 
 // console the resulting list of mates
 console.dir(mates);
-
-
-
-
-
 
 
 </script>
