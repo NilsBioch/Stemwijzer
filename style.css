@@ -6,4 +6,16 @@ body {
   }
 #panel{
   align-content:center;
+  margin-top: 5em;
+  height: 30em;
+}
+#buttonStart{
+  margin-top: 16%;
+}
+.btn{
+  margin-top: 15%;
+  margin-bottom: 2em;
+}
+ol {
+  list-style-type: none;
 }

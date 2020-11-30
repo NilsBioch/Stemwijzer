@@ -9,8 +9,10 @@ var button3 = document.getElementById('button3');
 var terugButton = document.getElementById('terugButton');
 var opnieuw = document.getElementById('opnieuw');
 
+
 var question = 0;
 score = [];
+//all the answers are stored in the answer array
 answers = [];
 
 for (let i = 0; i < parties.length; i++) {
@@ -19,43 +21,72 @@ for (let i = 0; i < parties.length; i++) {
         score: 0
     }
 }
+//start fucntion that shows the start button
+start();
 
-subjectTitle.textContent = subjects[question]['title'];
-subjectTitle.textContent = 'start';
-subjectDiscription.style.display = 'none';
-buttons.style.display = 'none';
-terugButton.style.display = 'none';
-opnieuw.style.display = 'none';
+//the start function sets display to none if you press the start it will unset
+function start() {
+    resetButtons();
+    subjectTitle.textContent = subjects[question]['title'];
+    subjectTitle.textContent = 'start';
+    subjectDiscription.style.display = 'none';
+    buttons.style.display = 'none';
+    terugButton.style.display = 'none';
+    opnieuw.style.display = 'none';
+    buttonStart.style.display = 'unset';
+
+    buttonStart.onclick = function () {
+        subjectTitle.textContent = subjects[question]['title'];
+        terugButton.style.display = 'unset';
+        buttons.style.display = 'unset';
+        subjectTitle.style.display = 'unset';
+        subjectDiscription.style.display = 'unset';
+        buttonStart.style.display = 'none';
+        subjectDiscription.textContent = subjects[question]['statement'];
+
+    };
+}
+
+function resetButtons() {
+    button1.className = 'btn btn-outline-primary'
+    button2.className = 'btn btn-outline-primary'
+    button3.className = 'btn btn-outline-primary'
+}
 
 button1.onclick = function () {
     myAnswer('pro');
+    resetButtons();
 };
 button2.onclick = function () {
     myAnswer('none');
+    resetButtons();
 };
 button3.onclick = function () {
     myAnswer('contra');
+    resetButtons();
 };
 opnieuw.onclick = function () {
     window.location.reload();
 };
-buttonStart.onclick = function () {
-    subjectTitle.textContent = subjects[question]['title'];
-    terugButton.style.display = 'unset';
-    buttons.style.display = 'unset';
-    subjectTitle.style.display = 'unset';
-    subjectDiscription.style.display = 'unset';
-    buttonStart.style.display = 'none';
-    subjectDiscription.textContent = subjects[question]['statement'];
-
-};
 
 function buttonTerug() {
+    //back button if you press back at question 1 it will go back to the start
     if (question != 0) {
         question--;
+        resetButtons();
+        if (answers[question] == 'pro') {
+            button1.className = 'btn btn-primary'
+        } else if (answers[question] == 'none') {
+            button2.className = 'btn btn-primary'
+        } else if (answers[question] == 'contra') {
+            button3.className = 'btn btn-primary'
+        }
         subjectTitle.textContent = subjects[question]['title'];
         subjectDiscription.textContent = subjects[question]['statement'];
+    } else if (question == 0) {
+        start();
     }
+
 }
 
 function myAnswer(antwoord) {
