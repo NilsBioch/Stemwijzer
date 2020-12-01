@@ -9,10 +9,9 @@ var button3 = document.getElementById('button3');
 var terugButton = document.getElementById('terugButton');
 var opnieuw = document.getElementById('opnieuw');
 
-
+//variables an arrays for the answers and scores, and the question counter
 var question = 0;
 score = [];
-//all the answers are stored in the answer array
 answers = [];
 
 for (let i = 0; i < parties.length; i++) {
@@ -26,61 +25,71 @@ start();
 
 //the start function sets display to none if you press the start it will unset
 function start() {
-    resetButtons();
-    subjectTitle.textContent = subjects[question]['title'];
-    subjectTitle.textContent = 'start';
+    buttonStart.style.display = 'unset';
+    subjectTitle.textContent = 'Start';
     subjectDiscription.style.display = 'none';
     buttons.style.display = 'none';
     terugButton.style.display = 'none';
     opnieuw.style.display = 'none';
-    buttonStart.style.display = 'unset';
 
     buttonStart.onclick = function () {
-        subjectTitle.textContent = subjects[question]['title'];
-        terugButton.style.display = 'unset';
-        buttons.style.display = 'unset';
-        subjectTitle.style.display = 'unset';
-        subjectDiscription.style.display = 'unset';
+        resetButtons();
         buttonStart.style.display = 'none';
+        subjectTitle.textContent = subjects[question]['title'];
+        subjectTitle.style.display = 'unset';
         subjectDiscription.textContent = subjects[question]['statement'];
+        subjectDiscription.style.display = 'unset';
+        buttons.style.display = 'unset';
+        terugButton.style.display = 'unset';
 
     };
 }
 
-function resetButtons() {
-    button1.className = 'btn btn-outline-primary'
-    button2.className = 'btn btn-outline-primary'
-    button3.className = 'btn btn-outline-primary'
-}
-
 button1.onclick = function () {
     myAnswer('pro');
-    resetButtons();
 };
 button2.onclick = function () {
     myAnswer('none');
-    resetButtons();
 };
 button3.onclick = function () {
     myAnswer('contra');
-    resetButtons();
+};
+button4.onclick = function () {
+    myAnswer('Geen Antwoord');
 };
 opnieuw.onclick = function () {
     window.location.reload();
 };
 
+function resetButtons() {
+    answers = [];
+    button1.className = 'btn btn-outline-primary'
+    button2.className = 'btn btn-outline-primary'
+    button3.className = 'btn btn-outline-primary'
+}
+
+//If you use the back button and choose another answer, your answers next will be stored.
+function buttonKeepColor(){
+    if (answers[question] == 'pro') {
+        button1.className = 'btn btn-primary'
+        button2.className = 'btn btn-outline-primary'
+        button3.className = 'btn btn-outline-primary'
+    } else if (answers[question] == 'none') {
+        button2.className = 'btn btn-primary'
+        button1.className = 'btn btn-outline-primary'
+        button3.className = 'btn btn-outline-primary'
+    } else if (answers[question] == 'contra') {
+        button3.className = 'btn btn-primary'
+        button1.className = 'btn btn-outline-primary'
+        button2.className = 'btn btn-outline-primary'
+    }
+}
+
 function buttonTerug() {
-    //back button if you press back at question 1 it will go back to the start
+    //back button if you press back at the first question it will go back to the start
     if (question != 0) {
         question--;
-        resetButtons();
-        if (answers[question] == 'pro') {
-            button1.className = 'btn btn-primary'
-        } else if (answers[question] == 'none') {
-            button2.className = 'btn btn-primary'
-        } else if (answers[question] == 'contra') {
-            button3.className = 'btn btn-primary'
-        }
+        buttonKeepColor();
         subjectTitle.textContent = subjects[question]['title'];
         subjectDiscription.textContent = subjects[question]['statement'];
     } else if (question == 0) {
@@ -89,9 +98,11 @@ function buttonTerug() {
 
 }
 
+//stores Answer in Answer Array and updates the question and title.
 function myAnswer(antwoord) {
     answers[question] = antwoord;
     question++;
+    buttonKeepColor();
     if (question != subjects.length) {
         subjectTitle.textContent = subjects[question]['title'];
         subjectDiscription.textContent = subjects[question]['statement'];
@@ -102,11 +113,12 @@ function myAnswer(antwoord) {
 
 function match() {
     for (let m = 0; m < subjects.length; m++) {
-        for (let i = 0; i < parties.length; i++) {
+        for (let i = 0; i < parties.length-1; i++) {
             if (answers[m] == subjects[m]['parties'][i]['position']) {
                 for (let p = 0; p < score.length; p++) {
                     if (subjects[m]['parties'][i]['name'] == score[p]['name']) {
-                        score[p]['score'] = score[p]['score'] + 100 / subjects.length;
+                        score[p]['score'] = score[p]['score'] + 1;
+                        console.log(score[p]['name'] + ' ' + score[p]['score']);
                     }
                 }
             }
@@ -121,9 +133,20 @@ function result() {
     terugButton.style.display = 'none';
     buttons.style.display = 'none';
     opnieuw.style.display = 'unset';
+
+    var VolledigeScore = 0;
     var highestScore = score.sort((a, b) => {
         return b.score - a.score;
     });
+    for (let d = 0; d < 3; d++) {
+        VolledigeScore = VolledigeScore + score[d]['score'];
+    }
+    for (let a = 0; a < score.length; a++) {
+        score[a]['score'] = 100 / VolledigeScore * score[a]['score'];
+        console.log(score[a]['score'] + '%');
+        console.log(highestScore);
+    }
+
     for (let d = 0; d < 3; d++) {
         var list = document.createElement("LI");
         var partiesList = document.createTextNode(highestScore[d]['name'] + ' ' + highestScore[d]['score'].toFixed(2) + '%');
