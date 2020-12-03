@@ -14,25 +14,25 @@
 
 <body>
 	<div id='panel' class=' p-2 bg-white'>
-		<div id='terugButton'><i class="fas fa-arrow-circle-left fa-2x"></i></div>
+		<div id='terugButton' onclick="buttonTerug()"><i class="fas fa-arrow-circle-left fa-2x"></i></div>
 		<div class='text-center'>
 			<h1 class='' id='subjectTitle'></h1></br>
 			<p id='subjectDiscription'></p>
 			<ol id="score">
 
 			</ol>
-			<div id="checkParties"></div>
+			<div id="checkPartiesBox"></div>
 			<div id="checkSubjects"></div>
 			<button id='buttonStart' class='btn btn-outline-primary' type='button'>start</button>
 			<div id='buttons'>
-				<button id='button1' class='btn btn-outline-primary' type='button'>Eens</button>
-				<button id='button2' class='btn btn-outline-primary' type='button'>Geen van beide</button>
-				<button id='button3' class='btn btn-outline-primary' type='button'>Oneens</button>
-				<button id='button4' class='btn btn-outline-dark' type='button'>Sla deze vraag over</button>
+				<button id='button1' class='btn btn-outline-primary' type='button' onclick="myAnswer('pro')">Eens</button>
+				<button id='button2' class='btn btn-outline-primary' type='button' onclick="myAnswer('none')">Geen van beide</button>
+				<button id='button3' class='btn btn-outline-primary' type='button' onclick="myAnswer('contra')">Oneens</button>
+				<button id='button4' class='btn btn-outline-dark' type='button' onclick="myAnswer('Geen Antwoord')">Sla deze vraag over</button>
 			</div>
-			<button id="buttonCheckParties" class='btn btn-outline-dark'>Ga door</button>
-			<button id="buttonCheckSubjects" class='btn btn-outline-dark'>Ga naar resultaat</button>
-			<button id='opnieuw' class='btn btn-outline-primary' type='button'>Opnieuw maken</button>
+			<button id="buttonCheckParties" class='btn btn-outline-dark' onclick="checkParties()">Ga door</button>
+			<button id="buttonCheckSubjects" class='btn btn-outline-dark' onclick="checkSubjects()">Ga naar resultaat</button>
+			<button id='buttonAgain' class='btn btn-outline-primary' type='button' onclick="window.location.reload()">Opnieuw maken</button>
 		</div>
 	</div>
 </body>
