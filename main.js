@@ -6,6 +6,7 @@ var buttons = document.getElementById('buttons')
 var button1 = document.getElementById('button1');
 var button2 = document.getElementById('button2');
 var button3 = document.getElementById('button3');
+var button4 = document.getElementById('button4');
 var terugButton = document.getElementById('terugButton');
 var opnieuw = document.getElementById('opnieuw');
 
@@ -46,15 +47,19 @@ function start() {
 }
 
 button1.onclick = function () {
+    resetButtons();
     myAnswer('pro');
 };
 button2.onclick = function () {
+    resetButtons();
     myAnswer('none');
 };
 button3.onclick = function () {
+    resetButtons();
     myAnswer('contra');
 };
 button4.onclick = function () {
+    resetButtons();
     myAnswer('Geen Antwoord');
 };
 opnieuw.onclick = function () {
@@ -62,7 +67,6 @@ opnieuw.onclick = function () {
 };
 
 function resetButtons() {
-    answers = [];
     button1.className = 'btn btn-outline-primary'
     button2.className = 'btn btn-outline-primary'
     button3.className = 'btn btn-outline-primary'
@@ -82,6 +86,11 @@ function buttonKeepColor(){
         button3.className = 'btn btn-primary'
         button1.className = 'btn btn-outline-primary'
         button2.className = 'btn btn-outline-primary'
+    } else if (answers[question] == 'Geen Antwoord') {
+        console.log('Geen Antwoord');
+        button1.className = 'btn btn-outline-primary'
+        button2.className = 'btn btn-outline-primary'
+        button3.className = 'btn btn-outline-primary'
     }
 }
 
@@ -101,6 +110,7 @@ function buttonTerug() {
 //stores Answer in Answer Array and updates the question and title.
 function myAnswer(antwoord) {
     answers[question] = antwoord;
+    console.log(answers);
     question++;
     buttonKeepColor();
     if (question != subjects.length) {
