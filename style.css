@@ -1,21 +1,37 @@
 body {
-    max-width: 100%;
-    height: auto;
-    background: url("./images/stemwijzer.png") no-repeat center fixed;
-    background-size: cover;
-  }
-#panel{
-  align-content:center;
+  max-width: 100%;
+  height: auto;
+  background: url("./images/stemwijzer.png") no-repeat center fixed;
+  background-size: cover;
+}
+
+.subjectTitle {
+  margin-top: 1em;
+}
+
+#terugButton {
+  margin-bottom: 2em;
+}
+#alert{
+  margin-left: 5em;
+}
+#panel {
   margin-top: 5em;
   height: 30em;
 }
-#buttonStart{
+
+.panelbox {
+  margin-left: 10%;
+}
+
+#buttonStart {
   margin-top: 16%;
 }
-.btn{
 
+.btn {
   margin-bottom: 2em;
 }
+
 ol {
   list-style-type: none;
 }
