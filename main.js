@@ -121,7 +121,7 @@ function myAnswer(antwoord) {
 
 function match() {
     for (let m = 0; m < subjects.length; m++) {
-        for (let i = 0; i < parties.length-1; i++) {
+        for (let i = 0; i < parties.length; i++) {
             if (answers[m] == subjects[m]['parties'][i]['position']) {
                 for (let p = 0; p < score.length; p++) {
                     if (subjects[m]['parties'][i]['name'] == score[p]['name']) {
@@ -139,9 +139,9 @@ function match() {
     buttons.style.display = 'none';
 
     for (let g = 0; g < parties.length; g++) {
-        var node = document.createElement('div');
-        node.innerHTML = '<input type="checkbox" id=' + parties[g]['name'] + ' name=' + parties[g]['name'] + '><label for=' + parties[g]['name'] + '>' + parties[g]['name']; + '</label>';
-        document.getElementById('checkPartiesBox').appendChild(node);
+        var checkList = document.createElement('div');
+        checkList.innerHTML = '<input type="checkbox" id=' + parties[g]['name'] + ' name=' + parties[g]['name'] + '><label for=' + parties[g]['name'] + '>' + parties[g]['name']; + '</label>';
+        document.getElementById('checkPartiesBox').appendChild(checkList);
 
     }
 }
