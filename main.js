@@ -1,21 +1,19 @@
 //const
-const alert = document.getElementById('alert');
+const minimumCheckedPartiesAlert = document.getElementById('minimumCheckedPartiesAlert');
 const panel = document.getElementById('panel');
-const btn = document.getElementsByClassName('btn');
+const buttonStart = document.getElementById('buttonStart');
+const terugButton = document.getElementById('terugButton');
 const subjectTitle = document.getElementById('subjectTitle');
 const subjectDiscription = document.getElementById('subjectDiscription');
-const buttonStart = document.getElementById('buttonStart');
 const buttons = document.getElementById('buttons');
 const button1 = document.getElementById('button1');
 const button2 = document.getElementById('button2');
 const button3 = document.getElementById('button3');
 const button4 = document.getElementById('button4');
-const terugButton = document.getElementById('terugButton');
 const buttonAgain = document.getElementById('buttonAgain');
 const checkPartiesBox = document.getElementById('checkPartiesBox');
 const score = document.getElementById('score');
 const buttonCheckSubjects = document.getElementById('buttonCheckSubjects');
-const buttonCheckParties = document.getElementById('buttonCheckParties');
 const importantParties = document.getElementById('importantParties');
 const buttonOutline = 'btn btn-outline-primary';
 const buttonPrimary = 'btn btn-primary'
@@ -43,12 +41,12 @@ for (let i = 0; i < subjects.length; i++) {
 }
 
 main();
-//groeperen elements, hergebruik
+
 function main() {
     answers = [];
     question = 0;
     setElement('none');
-    alert.style.display = 'none';
+    minimumCheckedPartiesAlert.style.display = 'none';
     score.style.display = 'none';
     importantParties.style.display = 'none';
     buttonAgain.style.display = 'none';
@@ -103,6 +101,8 @@ function buttonBack() {
         buttonKeepColor();
         updateSubject();
         setElement('unset');
+        importantParties.style.display = 'none';
+        buttonCheckSubjects.style.display = 'none';
         buttonAgain.style.display = 'none';
         checkPartiesBox.style.display = 'none';
     } else if (question == 0) {
@@ -129,16 +129,13 @@ function chooseSubjects() {
     buttonAgain.style.display = 'none';
     buttons.style.display = 'none';
     subjectDiscription.style.display = 'none';
-
     for (let g = 0; g < subjects.length; g++) {
         var node = document.createElement('div');
         node.innerHTML = '<input type="checkbox" id= questions' + g + ' name= questions' + g + '><label for= questions' + g + '>' + subjects[g].title; + '</label>';
         document.getElementById('checkSubjectsBox').appendChild(node);
     };
 };
-//ternere expressie
-//conditional expression
-// [] = . 
+
 function checkSubjects() {
     for (let d = 0; d < subjects.length; d++) {
         var checkbox = document.getElementById('questions' + d);
@@ -150,13 +147,11 @@ function checkSubjects() {
 function chooseParties() {
     subjectTitle.textContent = 'Welke partij wil je meenemen in je resultaat?';
     setElement('unset');
-    importantParties.style.display = 'unset';
     buttonCheckSubjects.style.display = 'none';
     buttonAgain.style.display = 'none';
     buttons.style.display = 'none';
     checkSubjectsBox.style.display = 'none';
     subjectDiscription.style.display = 'none';
-
     for (let g = 0; g < parties.length; g++) {
         var node = document.createElement('div');
         node.innerHTML = '<input type="checkbox" id=' + parties[g].name + ' name=' + parties[g].name + '><label for=' + parties[g].name + '>' + parties[g].name; + '</label>';
@@ -182,9 +177,9 @@ function checkParties() {
         };
     };
     if (checkedParties < minimumCheckedParties) {
-        alert.style.display = 'unset'
+        minimumCheckedPartiesAlert.style.display = 'unset'
     } else {
-        alert.style.display = 'none'
+        minimumCheckedPartiesAlert.style.display = 'none'
         match();
     }
 };
