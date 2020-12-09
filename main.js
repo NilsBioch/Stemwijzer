@@ -1,7 +1,7 @@
 //const
 const alert = document.getElementById('alert');
 const panel = document.getElementById('panel');
-const btn = document.getElementsByClassName('btn');  
+const btn = document.getElementsByClassName('btn');
 const subjectTitle = document.getElementById('subjectTitle');
 const subjectDiscription = document.getElementById('subjectDiscription');
 const buttonStart = document.getElementById('buttonStart');
@@ -13,9 +13,10 @@ const button4 = document.getElementById('button4');
 const terugButton = document.getElementById('terugButton');
 const buttonAgain = document.getElementById('buttonAgain');
 const checkPartiesBox = document.getElementById('checkPartiesBox');
+const score = document.getElementById('score');
+const buttonCheckSubjects = document.getElementById('buttonCheckSubjects');
 const buttonCheckParties = document.getElementById('buttonCheckParties');
-const afterQuestionButtons = document.getElementById('afterQuestionButtons');
-
+const importantParties = document.getElementById('importantParties');
 const buttonOutline = 'btn btn-outline-primary';
 const buttonPrimary = 'btn btn-primary'
 const minimumCheckedParties = 3;
@@ -44,43 +45,39 @@ for (let i = 0; i < subjects.length; i++) {
 main();
 //groeperen elements, hergebruik
 function main() {
-    answers = []
-    setElementsNone();
+    answers = [];
+    question = 0;
+    setElement('none');
+    alert.style.display = 'none';
+    score.style.display = 'none';
+    importantParties.style.display = 'none';
+    buttonAgain.style.display = 'none';
     buttonStart.style.display = 'unset';
     subjectTitle.textContent = 'Start';
     buttonStart.onclick = function () {
         resetButtons();
         updateSubject();
-        unsetElements();
-
+        setElement('unset');
+        importantParties.style.display = 'none';
+        buttonCheckSubjects.style.display = 'none';
         checkPartiesBox.style.display = 'none';
-        afterQuestionButtons.style.display = 'none';
         buttonAgain.style.display = 'none';
         buttonStart.style.display = 'none';
-        
     };
 }
+
 function updateSubject() {
     subjectTitle.textContent = subjects[question].title;
     subjectDiscription.textContent = subjects[question].statement;
 }
-function setElementsNone() {
-    buttons.style.display = 'none';
-    alert.style.display = 'none';
-    afterQuestionButtons.style.display = 'none';
-    checkPartiesBox.style.display = 'none';
-    subjectDiscription.style.display = 'none';
-    terugButton.style.display = 'none';
-}
 
-function unsetElements() {
-    buttons.style.display = 'unset';
-    afterQuestionButtons.style.display = 'unset';
-    checkPartiesBox.style.display = 'unset';
-    buttonCheckSubjects.style.display = 'unset';
-    buttonCheckParties.style.display = 'unset';
-    subjectDiscription.style.display = 'unset';
-    terugButton.style.display = 'unset';
+function setElement(element) {
+    buttons.style.display = element;
+    checkPartiesBox.style.display = element;
+    buttonCheckSubjects.style.display = element;
+    importantParties.style.display = element;
+    subjectDiscription.style.display = element;
+    terugButton.style.display = element;
 }
 
 function resetButtons() {
@@ -97,7 +94,7 @@ function buttonKeepColor() {
         button2.className = buttonPrimary;
     } else if (answers[question] == 'contra') {
         button3.className = buttonPrimary;
-    } 
+    }
 }
 
 function buttonBack() {
@@ -105,12 +102,9 @@ function buttonBack() {
         question--;
         buttonKeepColor();
         updateSubject();
-        unsetElements();
-        
-        afterQuestionButtons.style.display = 'none';
+        setElement('unset');
         buttonAgain.style.display = 'none';
         checkPartiesBox.style.display = 'none';
-
     } else if (question == 0) {
         main();
     };
@@ -130,15 +124,10 @@ function myAnswer(antwoord) {
 
 function chooseSubjects() {
     subjectTitle.textContent = 'Welk onderwerp vindt jij belangrijk?';
-    unsetElements();
-
-    buttonCheckParties.style.display = 'unset';
-    buttonCheckSubjects.style.display = 'none';
-    buttonBigParties.style.display = 'none';
+    setElement('unset');
+    importantParties.style.display = 'none';
     buttonAgain.style.display = 'none';
-
     buttons.style.display = 'none';
-
     subjectDiscription.style.display = 'none';
 
     for (let g = 0; g < subjects.length; g++) {
@@ -160,16 +149,11 @@ function checkSubjects() {
 
 function chooseParties() {
     subjectTitle.textContent = 'Welke partij wil je meenemen in je resultaat?';
-    unsetElements();
-
-
-    buttonCheckSubjects.style.display = 'unset';
-    buttonBigParties.style.display = 'unset';
-    buttonCheckParties.style.display = 'none';
+    setElement('unset');
+    importantParties.style.display = 'unset';
+    buttonCheckSubjects.style.display = 'none';
     buttonAgain.style.display = 'none';
-
     buttons.style.display = 'none';
-
     checkSubjectsBox.style.display = 'none';
     subjectDiscription.style.display = 'none';
 
@@ -212,7 +196,7 @@ function match() {
                 for (let p = 0; p < scores.length; p++) {
                     if (subjects[m].parties[i].name == scores[p].name) {
                         if (questions[m].important = true) {
-                            scores[p].score = scores[p].score + 2 ;
+                            scores[p].score = scores[p].score + 2;
                             console.log('important questions');
                         } else {
                             scores[p].score = scores[p].score + 1;
@@ -227,8 +211,10 @@ function match() {
 
 function result() {
     subjectTitle.textContent = 'Resultaat';
-    setElementsNone();
+    setElement('none');
+    score.style.display = 'unset';
     buttonAgain.style.display = 'unset';
+    importantParties.style.display = 'none';
     var highestScore = scores.sort((a, b) => {
         return b.score - a.score;
     });
