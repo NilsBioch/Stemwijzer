@@ -16,21 +16,24 @@ body {
 .subjectTitle {
   margin-top: 1em;
 }
-.subjectDiscription{
+
+.subjectDiscription {
   margin-top: 2em;
   padding: 2em;
 }
+
 #terugButton {
   margin-bottom: 2em;
 }
-#alert{
+
+#alert {
   margin-left: 5em;
 }
-
 
 .panelbox {
   margin-left: 10%;
 }
+
 #buttonStart {
   margin-top: 16%;
 }

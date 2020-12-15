@@ -1,8 +1,4 @@
-//const
 const minimumCheckedPartiesAlert = document.getElementById('minimumCheckedPartiesAlert');
-const btn = document.getElementsByClassName('btn')
-const panel = document.getElementById('panel');
-const score = document.getElementById('score');
 const subjectTitle = document.getElementById('subjectTitle');
 const subjectDiscription = document.getElementById('subjectDiscription');
 const buttonStart = document.getElementById('buttonStart');
@@ -23,6 +19,7 @@ const minimumPartieSize = 10;
 
 //filters if there are duplicates
 var uniqueParties = parties.map(e => e['name']).map((e, i, final) => final.indexOf(e) === i && i).filter(obj => parties[obj]).map(e => parties[e]);
+
 var question = 0;
 var scores = [];
 var answers = [];
@@ -38,9 +35,9 @@ for (let i = 0; i < uniqueParties.length; i++) {
 };
 
 //makes questions object with questions information
-for (let i = 0; i < subjects.length; i++) {
-    questions[i] = {
-        name: subjects[i].title,
+for (let o = 0; o < subjects.length; o++) {
+    questions[o] = {
+        name: subjects[o].title,
         important: false,
     };
 };
@@ -100,7 +97,7 @@ function buttonKeepColor() {
         button2.className = buttonPrimary;
     } else if (answers[question] == 'contra') {
         button3.className = buttonPrimary;
-    }
+    };
 };
 
 //Go back 1 question, it will show the right stuff
@@ -123,9 +120,9 @@ function myAnswer(yourAnswer) {
     answers[question] = yourAnswer;
     question++;
     buttonKeepColor();
-    if (question != subjects.length) {
+    if (question != questions.length) {
         updateSubject();
-    } else if (question == subjects.length) {
+    } else if (question == questions.length) {
         chooseSubjects();
     };
 };
@@ -138,17 +135,17 @@ function chooseSubjects() {
     backButton.style.display = 'none';
     buttons.style.display = 'none';
     subjectDiscription.style.display = 'none';
-    for (let g = 0; g < subjects.length; g++) {
+    for (let g = 0; g < questions.length; g++) {
         var node = document.createElement('div');
-        node.innerHTML = '<input type="checkbox" id= questions' + g + ' name= questions' + g + '><label for= questions' + g + '>' + subjects[g].title; + '</label>';
+        node.innerHTML = '<input type="checkbox" id="' + questions[g].name + '"name="' + questions[g].name + '"><label for="' + questions[g].name + '">' + questions[g].name + '</label>';
         document.getElementById('checkSubjectsBox').appendChild(node);
     };
 };
 
 //If you press 'Ga Door' it will check if a checkbox is checked
 function checkSubjects() {
-    for (let d = 0; d < subjects.length; d++) {
-        var checkbox = document.getElementById('questions' + d);
+    for (let d = 0; d < questions.length; d++) {
+        var checkbox = document.getElementById(questions[d].name);
         questions[d].important = checkbox.checked;
     };
     chooseParties();
@@ -177,8 +174,7 @@ function chooseParties() {
     };
 };
 
-// If you press 'Ga naar resultaat' it will check if a checkbox is checked, 
-// and if you press 'Alleen grote partijen' it will check every partie wich size is bigger than 10
+// If you press 'Ga naar resultaat' it will check if a checkbox is checked, and if you press 'Alleen grote partijen' it will check every partie wich size is bigger than 10
 function checkParties() {
     let checkedParties = 0;
     for (let d = 0; d < scores.length; d++) {
@@ -198,8 +194,7 @@ function checkParties() {
     };
 };
 
-//matcher, if you checked a subject you find important it will give extra points to the partie 
-//that has a matching answer on that question
+//matcher, if you checked a subject you find important it will give extra points to the partie that has a matching answer on that question
 function match() {
     for (let m = 0; m < subjects.length; m++) {
         for (let i = 0; i < subjects[m].parties.length; i++) {
@@ -219,8 +214,7 @@ function match() {
     result();
 }
 
-//It will calculate the 100% score and sort the partie scores, then it will show the parties you checked 
-//with the score
+//It will calculate the 100% score and sort the partie scores, then it will show the parties you checked with the score
 function result() {
     subjectTitle.textContent = 'Resultaat';
     score.style.display = 'unset';
