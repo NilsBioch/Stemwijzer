@@ -5,30 +5,42 @@ body {
   background-size: cover;
 }
 
+#panel {
+  background-color: rgba(255, 255, 255, 0.739);
+  margin-top: 5em;
+  padding: 2em;
+  height: 20%;
+  width: 100%;
+}
+
 .subjectTitle {
   margin-top: 1em;
+}
+
+.subjectDiscription {
+  margin-top: 2em;
+  padding: 2em;
 }
 
 #terugButton {
   margin-bottom: 2em;
 }
-#alert{
+
+#alert {
   margin-left: 5em;
-}
-#panel {
-  margin-top: 5em;
-  height: 30em;
 }
 
 .panelbox {
   margin-left: 10%;
 }
+
 #buttonStart {
   margin-top: 16%;
 }
 
 .btn {
   margin-bottom: 2em;
+  margin-top: 2em;
 }
 
 ol {

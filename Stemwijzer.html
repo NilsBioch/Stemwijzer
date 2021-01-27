@@ -3,38 +3,35 @@
 
 <head>
 	<link href='style.css' rel='stylesheet'>
-	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css'
-		integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous'>
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous'>
 	<script src='https://kit.fontawesome.com/a05e7b2591.js' crossorigin='anonymous'></script>
-	<script src='data.js'></script>
-	<!-- <script src='http://stemwijzer.dvc-icta.nl/data.js'></script> -->
+	<!-- <script src='data.js'></script> -->
+	<script src='http://stemwijzer.dvc-icta.nl/data.js'></script>
 	<title>Stemwijzer</title>
 	<meta charset='utf-8'>
 </head>
-
 <body>
-	<div id='panel' class='p-2 bg-white'>
-		<div id='terugButton' onclick="buttonBack()"><i class='fas fa-arrow-circle-left fa-2x'></i></div>
+	<div id='panel'>
+		<div id='backButton' onclick="buttonBack()"><i class='fas fa-arrow-circle-left fa-2x'></i></div>
 		<div class='panelbox'>
-			<div id='minimumCheckedPartiesAlert' class='text-center alert alert-danger' role='alert'>
-				Klik teminste 3 partijen aan
-			</div>
 			<h1 class='subjectTitle' id='subjectTitle'></h1></br>
 			<p id='subjectDiscription'></p>
 			<ol id='score'></ol>
-			<div class='checkPartiesBox' id='checkPartiesBox'></div>
 			<div class='checkSubjectsBox' id='checkSubjectsBox'></div>
+			<div class='checkPartiesBox' id='checkPartiesBox'></div>
 			<button id='buttonStart' class='btn btn-outline-primary' type='button'>start</button>
 			<div id='buttons' class='buttons'>
-				<button id='button1' class='btn btn-outline-primary' type='button' onclick="myAnswer('pro')">Eens</button>
-				<button id='button2' class='btn btn-outline-primary' type='button' onclick="myAnswer('none')">Geen vanbeide</button>
+				<button id='button1' class='btn btn-outline-primary' type='button'onclick="myAnswer('pro')">Eens</button>
+				<button id='button2' class='btn btn-outline-primary' type='button' onclick="myAnswer('none')">Geen van beide</button>
 				<button id='button3' class='btn btn-outline-primary' type='button' onclick="myAnswer('contra')">Oneens</button>
 				<button id='button4' class='btn btn-outline-dark' type='button' onclick="myAnswer(' ')">Sla deze vraagover</button>
 			</div>
 			<button id='buttonCheckSubjects' class='btn btn-outline-dark' onclick="checkSubjects()">Ga door</button>
 			<div id='importantParties'>
 				<button id='buttonBigParties' class='btn btn-outline-dark'>Alleen grote partijen</button>
+				<button id='buttonSecParties' class='btn btn-outline-dark'>Alleen seculiere partijen</button>
 				<button id='buttonCheckParties' class='btn btn-outline-dark' onclick="checkParties()">Ga naar resultaat</button>
+				<div id='minimumCheckedPartiesAlert' class='text-center alert alert-danger' role='alert'>Klik teminste 3 partijen aan</div>
 			</div>
 			<button id='buttonAgain' class='btn btn-outline-primary' type='button' onclick='window.location.reload();'>Opnieuw maken</button>
 		</div>
