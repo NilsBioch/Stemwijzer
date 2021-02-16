@@ -1,17 +1,17 @@
-const minimumCheckedPartiesAlert = document.getElementById('minimumCheckedPartiesAlert');
-const subjectTitle = document.getElementById('subjectTitle');
-const subjectDiscription = document.getElementById('subjectDiscription');
-const buttonStart = document.getElementById('buttonStart');
-const backButton = document.getElementById('backButton');
-const buttons = document.getElementById('buttons');
-const button1 = document.getElementById('button1');
-const button2 = document.getElementById('button2');
-const button3 = document.getElementById('button3');
-const button4 = document.getElementById('button4');
-const buttonAgain = document.getElementById('buttonAgain');
-const checkPartiesBox = document.getElementById('checkPartiesBox');
-const buttonCheckSubjects = document.getElementById('buttonCheckSubjects');
-const importantParties = document.getElementById('importantParties');
+var minimumCheckedPartiesAlert = document.getElementById('minimumCheckedPartiesAlert');
+var subjectTitle = document.getElementById('subjectTitle');
+var subjectDiscription = document.getElementById('subjectDiscription');
+var buttonStart = document.getElementById('buttonStart');
+var backButton = document.getElementById('backButton');
+var buttons = document.getElementById('buttons');
+var button1 = document.getElementById('button1');
+var button2 = document.getElementById('button2');
+var button3 = document.getElementById('button3');
+var button4 = document.getElementById('button4');
+var buttonAgain = document.getElementById('buttonAgain');
+var checkPartiesBox = document.getElementById('checkPartiesBox');
+var buttonCheckSubjects = document.getElementById('buttonCheckSubjects');
+var importantParties = document.getElementById('importantParties');
 const buttonOutline = 'btn btn-outline-primary';
 const buttonPrimary = 'btn btn-primary'
 const minimumCheckedParties = 3;
@@ -30,16 +30,9 @@ for (let i = 0; i < uniqueParties.length; i++) {
     scores[i] = {
         name: uniqueParties[i].name,
         score: 0,
-        secular: false,
         display: false,
     };
 };
-for (let i = 0; i < uniqueParties.length; i++) {
-    if(scores[i].name == 'CDA' || scores[i].name == 'ChristenUnie' || scores[i].name == 'SGP'){
-        console.log(scores[i].name + ' is een seculiere partij');
-        scores[i].secular = true;
-    }
-}
 
 //makes questions object with questions information
 for (let o = 0; o < subjects.length; o++) {
@@ -182,7 +175,7 @@ function chooseParties() {
     buttonSecParties.onclick = function () {
         for (let a = 0; a < uniqueParties.length; a++) {
             var checkbox = document.getElementById(scores[a].name);
-            checkbox.checked = scores[a].secular == true;
+            checkbox.checked = uniqueParties[a].secular == true;
         };
     };
 };
@@ -207,6 +200,7 @@ function checkParties() {
     };
 };
 
+// voor elke vraag kijkt hij naar het aantal partijen en daar loopt hij door heen om de antwoorden te bekijken
 //matcher, if you checked a subject you find important it will give extra points to the partie that has a matching answer on that question
 function match() {
     for (let m = 0; m < subjects.length; m++) {

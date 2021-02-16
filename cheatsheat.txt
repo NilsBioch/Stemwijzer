@@ -1,0 +1,92 @@
+Leerdoelen
+
+---------------------------------------------------------------------
+Variables
+---------------------------------------------------------------------
+
+variables zijn containers waar je waarde aan kan geven
+var, const, let
+var varieert.
+Const veranderd niet.
+
+---------------------------------------------------------------------
+Value-types
+---------------------------------------------------------------------
+
+string      = 'string'
+boolean     = true/false
+number      = 123
+null        = null
+undefined   = 
+---------------------------------------------------------------------
+Statements and assignments
+---------------------------------------------------------------------
+
+---------------------------------------------------------------------
+Operators in expressions 
+---------------------------------------------------------------------
+Assignment operators
+assignment operators wijzen waarde toe aan variables
+
+=, +=, -=, *=, /=, %=, **=
+
+Comparison operators
+comparison operators gebruik je om te bepalen  of er een verschil of gelijkheid zit tussen waardes
+
+==, ===, !=, !==, >, <, >=, <=, ?
+
+Arithmetic operators
+arithmetic operators worden gebruikt om berekeningen uit te voeren op getallen
+
++, -, *, **, /, %, ++, --
+
+Logical operators
+Logical operators worden gebruikt om de logica tussen variables of waardes te bepalen.
+
+&&, ||, !
+
+String operators
+string operators worden meestal gebruikt om verschillende strings 1 string te maken
+
+Bitwise operators
+
+Conditional (ternary) operator
+
+Comma operator
+
+Unary operators
+
+Relational operators
+
+---------------------------------------------------------------------
+
+
+block (compound) statements
+
+conditional(if else) statements
+
+conditional expressions
+
+iteration (for while) statements
+
+arrays
+Een array is een variable waar je meerdere waardes in kan opslaan
+objects
+
+Function calls and declarations
+function test(){}; Dit is een declaratie
+test();            Dit is een call
+
+Nested statements
+
+Array-iteration statements
+
+Anonymous functions
+
+Comments
+Kan je gebruiken in javascript om een stuk code toe te lichten 
+// // 
+/* */
+
+Code API application (DOM in JavaScript)
+
