@@ -1,40 +1,51 @@
-var minimumCheckedPartiesAlert = document.getElementById('minimumCheckedPartiesAlert');
-var subjectTitle = document.getElementById('subjectTitle');
-var subjectDiscription = document.getElementById('subjectDiscription');
-var buttonStart = document.getElementById('buttonStart');
-var backButton = document.getElementById('backButton');
-var buttons = document.getElementById('buttons');
-var button1 = document.getElementById('button1');
-var button2 = document.getElementById('button2');
-var button3 = document.getElementById('button3');
-var button4 = document.getElementById('button4');
-var buttonAgain = document.getElementById('buttonAgain');
-var checkPartiesBox = document.getElementById('checkPartiesBox');
-var buttonCheckSubjects = document.getElementById('buttonCheckSubjects');
-var importantParties = document.getElementById('importantParties');
+const minimumCheckedPartiesAlert = document.getElementById('minimumCheckedPartiesAlert');
+const subjectTitle = document.getElementById('subjectTitle');
+const subjectDiscription = document.getElementById('subjectDiscription');
+const buttonStart = document.getElementById('buttonStart');
+const backButton = document.getElementById('backButton');
+const buttons = document.getElementById('buttons');
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
+const button3 = document.getElementById('button3');
+const button4 = document.getElementById('button4');
+const buttonAgain = document.getElementById('buttonAgain');
+const checkPartiesBox = document.getElementById('checkPartiesBox');
+const buttonCheckSubjects = document.getElementById('buttonCheckSubjects');
+const importantParties = document.getElementById('importantParties');
 const buttonOutline = 'btn btn-outline-primary';
 const buttonPrimary = 'btn btn-primary'
 const minimumCheckedParties = 3;
 const minimumPartieSize = 10;
 
-//filters if there are duplicates
-var uniqueParties = parties.map(e => e['name']).map((e, i, final) => final.indexOf(e) === i && i).filter(obj => parties[obj]).map(e => parties[e]);
+/** filters if there are duplicates */
 
+var uniqueParties = 
+    // store the comparison  values in array
+    parties.map(e => e['name'])
+    // store the indexes of the unique objects
+    .map((e, i, final) => final.indexOf(e) === i && i)
+    //deletes the duplicates and returns te unique 
+    .filter(obj => parties[obj]).map(e => parties[e]);
+
+/** keeps track of wich question you are at */
 var question = 0;
+/** saves score in this object */
 var scores = [];
+/** saves your answers */
 var answers = [];
+/** Saves if the question is important to add a bonus point */
 var questions = [];
 
-//makes partie object with partie information
-for (let i = 0; i < uniqueParties.length; i++) {
+/** makes partie object with partie information */
+for (let i = 0; i < parties.length; i++) {
     scores[i] = {
-        name: uniqueParties[i].name,
+        name: parties[i].name,
         score: 0,
         display: false,
     };
 };
 
-//makes questions object with questions information
+/** makes questions object with questions information */
 for (let o = 0; o < subjects.length; o++) {
     questions[o] = {
         name: subjects[o].title,
@@ -44,7 +55,7 @@ for (let o = 0; o < subjects.length; o++) {
 
 main();
 
-//Start function, will set display to starting stage
+/** Start function, will set display to starting stage */
 function main() {
     answers = [];
     question = 0;
@@ -65,30 +76,36 @@ function main() {
     };
 };
 
+
 //Updates the title and discription
 function updateSubject() {
     subjectTitle.textContent = subjects[question].title;
     subjectDiscription.textContent = subjects[question].statement;
 };
 
-//Sets element to 'unset' or 'none'
-function setElement(element) {
-    buttons.style.display = element;
-    checkPartiesBox.style.display = element;
-    buttonCheckSubjects.style.display = element;
-    importantParties.style.display = element;
-    subjectDiscription.style.display = element;
-    backButton.style.display = element;
+
+/**
+ * Sets display to the parameter
+ * 
+ * @param {string} displaySetting - Sets display to 'unset' or 'none'
+ */
+function setElement(displaySetting) {
+    buttons.style.display = displaySetting;
+    checkPartiesBox.style.display = displaySetting;
+    buttonCheckSubjects.style.display = displaySetting;
+    importantParties.style.display = displaySetting;
+    subjectDiscription.style.display = displaySetting;
+    backButton.style.display = displaySetting;
 };
 
-//Gives button class='btn btn-outline-primary' 
+/** Gives button class='btn btn-outline-primary' */
 function resetButtons() {
     button1.className = buttonOutline;
     button2.className = buttonOutline;
     button3.className = buttonOutline;
 };
 
-//Keeps color if you go back and fort through questions
+/** Keeps color if you go back and fort through questions */
 function buttonKeepColor() {
     resetButtons();
     if (answers[question] == 'pro') {
@@ -100,7 +117,7 @@ function buttonKeepColor() {
     };
 };
 
-//Go back 1 question, it will show the right stuff
+/** Go back 1 question, it will show the right stuff */
 function buttonBack() {
     if (question != 0) {
         question--;
@@ -114,7 +131,12 @@ function buttonBack() {
     };
 };
 
-//Stores answer in answer array, if you are at the end of the questions it will go to ChooseSubjects
+
+/**
+ * Stores answer in answer array, if you are at the end of the questions it will go to ChooseSubjects
+ * 
+ * @param {string} yourAnswer - Your answer to the questions
+ */
 function myAnswer(yourAnswer) {
     resetButtons();
     answers[question] = yourAnswer;
@@ -127,7 +149,7 @@ function myAnswer(yourAnswer) {
     };
 };
 
-//Makes checkboxes for every subject
+/** Makes checkboxes for every subject */
 function chooseSubjects() {
     subjectTitle.textContent = 'Welk onderwerp vindt jij belangrijk?';
     setElement('unset');
@@ -142,7 +164,7 @@ function chooseSubjects() {
     };
 };
 
-//If you press 'Ga Door' it will check if a checkbox is checked
+/** If you press 'Ga Door' it will check if a checkbox is checked */
 function checkSubjects() {
     for (let d = 0; d < questions.length; d++) {
         var checkbox = document.getElementById(questions[d].name);
@@ -151,7 +173,7 @@ function checkSubjects() {
     chooseParties();
 };
 
-//Makes checkboxes for every partie you want to see in your result
+/** Makes checkboxes for every partie you want to see in your result */
 function chooseParties() {
     subjectTitle.textContent = 'Welke partij wil je meenemen in je resultaat?';
     setElement('unset');
@@ -180,7 +202,10 @@ function chooseParties() {
     };
 };
 
-// If you press 'Ga naar resultaat' it will check if a checkbox is checked, and if you press 'Alleen grote partijen' it will check every partie wich size is bigger than 10
+/** 
+ * If you press 'Ga naar resultaat' it will check if a checkbox is checked, 
+ * and if you press 'Alleen grote partijen' it will check every partie wich size is bigger than 10 
+ */
 function checkParties() {
     let checkedParties = 0;
     for (let d = 0; d < scores.length; d++) {
@@ -197,11 +222,15 @@ function checkParties() {
     } else {
         minimumCheckedPartiesAlert.style.display = 'none'
         match();
+        result();
     };
 };
 
-// voor elke vraag kijkt hij naar het aantal partijen en daar loopt hij door heen om de antwoorden te bekijken
-//matcher, if you checked a subject you find important it will give extra points to the partie that has a matching answer on that question
+/**  
+ * Dutch/Nederlands: voor elke vraag kijkt hij naar het aantal partijen en daar loopt hij door heen om de antwoorden te bekijken 
+ * 
+ * Englis/Engels: matcher, if you checked a subject you find important it will give extra points to the partie that has a matching answer on that question 
+ */
 function match() {
     for (let m = 0; m < subjects.length; m++) {
         for (let i = 0; i < subjects[m].parties.length; i++) {
@@ -218,10 +247,9 @@ function match() {
             };
         };
     };
-    result();
 }
 
-//It will calculate the 100% score and sort the partie scores, then it will show the parties you checked with the score
+/** It will calculate the 100% score and sort the partie scores, then it will show the parties you checked with the score */
 function result() {
     subjectTitle.textContent = 'Resultaat';
     score.style.display = 'unset';
@@ -235,7 +263,7 @@ function result() {
         };
     };
     for (let i = 0; i < scores.length; i++) {
-        scores[i].score = 100 / totalScore * scores[i].score;
+        scores[i].score = scores[i].score / totalScore * 100;
     };
     var highestScore = scores.sort((a, b) => {
         return b.score - a.score;
