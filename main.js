@@ -18,11 +18,10 @@ const minimumCheckedParties = 3;
 const minimumPartieSize = 10;
 
 /** filters if there are duplicates */
-
 var uniqueParties = 
     // store the comparison  values in array
     parties.map(e => e['name'])
-    // store the indexes of the unique objects
+    // store the unique objects
     .map((e, i, final) => final.indexOf(e) === i && i)
     //deletes the duplicates and returns te unique 
     .filter(obj => parties[obj]).map(e => parties[e]);
@@ -265,9 +264,12 @@ function result() {
     for (let i = 0; i < scores.length; i++) {
         scores[i].score = scores[i].score / totalScore * 100;
     };
-    var highestScore = scores.sort((a, b) => {
-        return b.score - a.score;
-    });
+    // a negative number if a is smaller than b – so a will be sorted to the left of b
+    // a positive number if a is bigger than b – so a will be sorted to the right of b
+    // zero if they are equal – so it doesn’t matter which one comes first
+
+    var highestScore = scores.sort((a, b) => b.score - a.score);
+    
     for (let d = 0; d < scores.length; d++) {
         if (scores[d].display) {
             var list = document.createElement('LI');
