@@ -4,10 +4,10 @@ const subjectDiscription = document.getElementById('subjectDiscription');
 const buttonStart = document.getElementById('buttonStart');
 const backButton = document.getElementById('backButton');
 const buttons = document.getElementById('buttons');
-const button1 = document.getElementById('button1');
-const button2 = document.getElementById('button2');
-const button3 = document.getElementById('button3');
-const button4 = document.getElementById('button4');
+const buttonPro = document.getElementById('buttonPro');
+const buttonNone = document.getElementById('buttonNone');
+const buttonContra = document.getElementById('buttonContra');
+const buttonBlank = document.getElementById('buttonBlank');
 const buttonAgain = document.getElementById('buttonAgain');
 const checkPartiesBox = document.getElementById('checkPartiesBox');
 const buttonCheckSubjects = document.getElementById('buttonCheckSubjects');
@@ -100,20 +100,20 @@ function setElement(displaySetting) {
 
 /** Gives button class='btn btn-outline-primary' */
 function resetButtons() {
-    button1.className = buttonOutline;
-    button2.className = buttonOutline;
-    button3.className = buttonOutline;
+    buttonPro.className = buttonOutline;
+    buttonNone.className = buttonOutline;
+    buttonContra.className = buttonOutline;
 };
 
 /** Keeps color if you go back and fort through questions */
 function buttonKeepColor() {
     resetButtons();
     if (answers[question] == 'pro') {
-        button1.className = buttonPrimary;
+        buttonPro.className = buttonPrimary;
     } else if (answers[question] == 'none') {
-        button2.className = buttonPrimary;
+        buttonNone.className = buttonPrimary;
     } else if (answers[question] == 'contra') {
-        button3.className = buttonPrimary;
+        buttonContra.className = buttonPrimary;
     };
 };
 
