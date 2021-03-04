@@ -17,18 +17,20 @@ const buttonPrimary = 'btn btn-primary'
 const minimumCheckedParties = 3;
 const minimumPartieSize = 10;
 
-/** filters if there are duplicates */
-var uniqueParties = 
-    // store the comparison  values in array
-    parties.map(e => e['name'])
-    // store the unique objects
-    .map((e, i, final) => final.indexOf(e) === i && i)
-    //deletes the duplicates and returns te unique 
-    .filter(obj => parties[obj]).map(e => parties[e]);
+/** Filterd parties, there are no duplicates in here*/              
+    var uniqueParties = []; 
+    var uniqueObject = {};    
+    for (let i in parties) { 
+        partieName = parties[i]['name']; 
+                uniqueObject[partieName] = parties[i]; 
+            } 
+        for (i in uniqueObject) { 
+            uniqueParties.push(uniqueObject[i]); 
+        } 
 
 /** keeps track of wich question you are at */
 var question = 0;
-/** saves score in this object */
+/** saves the score for the partie*/
 var scores = [];
 /** saves your answers */
 var answers = [];
@@ -36,9 +38,9 @@ var answers = [];
 var questions = [];
 
 /** makes partie object with partie information */
-for (let i = 0; i < parties.length; i++) {
+for (let i = 0; i < uniqueParties.length; i++) {
     scores[i] = {
-        name: parties[i].name,
+        name: uniqueParties[i].name,
         score: 0,
         display: false,
     };
@@ -78,7 +80,7 @@ function main() {
 
 //Updates the title and discription
 function updateSubject() {
-    subjectTitle.textContent = subjects[question].title;
+    subjectTitle.textContent = question + 1 +' '+ subjects[question].title;
     subjectDiscription.textContent = subjects[question].statement;
 };
 
@@ -228,7 +230,7 @@ function checkParties() {
 /**  
  * Dutch/Nederlands: voor elke vraag kijkt hij naar het aantal partijen en daar loopt hij door heen om de antwoorden te bekijken 
  * 
- * Englis/Engels: matcher, if you checked a subject you find important it will give extra points to the partie that has a matching answer on that question 
+ * Englis/Engels: matcher, if you checked a subject you think important it will give extra points to the partie that has a matching answer on that question 
  */
 function match() {
     for (let m = 0; m < subjects.length; m++) {
@@ -264,12 +266,11 @@ function result() {
     for (let i = 0; i < scores.length; i++) {
         scores[i].score = scores[i].score / totalScore * 100;
     };
-    // a negative number if a is smaller than b – so a will be sorted to the left of b
-    // a positive number if a is bigger than b – so a will be sorted to the right of b
-    // zero if they are equal – so it doesn’t matter which one comes first
-
-    var highestScore = scores.sort((a, b) => b.score - a.score);
-    
+    /* a negative number if a is smaller than b – so a will be sorted to the left of b
+    * a positive number if a is bigger than b – so a will be sorted to the right of b
+    * zero if they are equal – so it doesn’t matter which one comes first 
+    */
+    var highestScore = scores.sort((a, b) => b.score - a.score); 
     for (let d = 0; d < scores.length; d++) {
         if (scores[d].display) {
             var list = document.createElement('LI');
