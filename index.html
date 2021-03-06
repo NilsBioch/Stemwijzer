@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id='panel'>
-		<div id='backButton' onclick="buttonBack()"><i class='fas fa-arrow-circle-left fa-2x'></i></div>
+		<div id='backButton'><i class='fas fa-arrow-circle-left fa-2x'></i></div>
 		<div class='panelbox'>
 			<h1 class='subjectTitle' id='subjectTitle'></h1></br>
 			<p id='subjectDiscription'></p>
@@ -21,19 +21,19 @@
 			<div class='checkPartiesBox' id='checkPartiesBox'></div>
 			<button id='buttonStart' class='btn btn-outline-primary' type='button'>Start</button>
 			<div id='buttons' class='buttons'>
-				<button id='buttonPro' class='btn btn-outline-primary' type='button' onclick="myAnswer('pro')">Eens</button>
-				<button id='buttonNone' class='btn btn-outline-primary' type='button' onclick="myAnswer('none')">Geen van beide</button>
-				<button id='buttonContra' class='btn btn-outline-primary' type='button' onclick="myAnswer('contra')">Oneens</button>
-				<button id='buttonBlank' class='btn btn-outline-dark' type='button' onclick="myAnswer(' ')">Sla deze vraagover</button>
+				<button id='buttonPro' class='btn btn-outline-primary' type='button'>Eens</button>
+				<button id='buttonNone' class='btn btn-outline-primary' type='button'>Geen van beide</button>
+				<button id='buttonContra' class='btn btn-outline-primary' type='button'>Oneens</button>
+				<button id='buttonBlank' class='btn btn-outline-dark' type='button'>Sla deze vraagover</button>
 			</div>
-			<button id='buttonCheckSubjects' class='btn btn-outline-dark' onclick="checkSubjects()">Ga door</button>
+			<button id='buttonCheckSubjects' class='btn btn-outline-dark'>Ga door</button>
 			<div id='importantParties'>
 				<button id='buttonBigParties' class='btn btn-outline-dark'>Alleen grote partijen</button>
 				<button id='buttonSecParties' class='btn btn-outline-dark'>Alleen seculiere partijen</button>
-				<button id='buttonCheckParties' class='btn btn-outline-dark' onclick="checkParties()">Ga naar resultaat</button>
+				<button id='buttonCheckParties' class='btn btn-outline-dark'>Ga naar resultaat</button>
 				<div id='minimumCheckedPartiesAlert' class='text-center alert alert-danger' role='alert'>Klik teminste 3 partijen aan</div>
 			</div>
-			<button id='buttonAgain' class='btn btn-outline-primary' type='button' onclick='window.location.reload();'>Opnieuw maken</button>
+			<button id='buttonAgain' class='btn btn-outline-primary' type='button'>Opnieuw maken</button>
 		</div>
 	</div>
 </body>

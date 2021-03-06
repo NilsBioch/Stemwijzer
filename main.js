@@ -17,6 +17,15 @@ const buttonPrimary = 'btn btn-primary'
 const minimumCheckedParties = 3;
 const minimumPartieSize = 10;
 
+buttonPro.onclick = () => myAnswer('pro');
+buttonNone.onclick = () => myAnswer('none');
+buttonContra.onclick = () => myAnswer('contra');
+buttonBlank.onclick = () => myAnswer(' ');
+backButton.onclick = () => buttonBack();
+buttonCheckSubjects.onclick = () => checkSubjects();
+buttonCheckParties.onclick = () => checkParties();
+buttonAgain.onclick = () => window.location.reload();
+
 /** Filterd parties, there are no duplicates in here*/              
     var uniqueParties = []; 
     var uniqueObject = {};    
@@ -30,10 +39,13 @@ const minimumPartieSize = 10;
 
 /** keeps track of wich question you are at */
 var question = 0;
+
 /** saves the score for the partie*/
 var scores = [];
+
 /** saves your answers */
 var answers = [];
+
 /** Saves if the question is important to add a bonus point */
 var questions = [];
 
@@ -56,8 +68,10 @@ for (let o = 0; o < subjects.length; o++) {
 
 main();
 
+
 /** Start function, will set display to starting stage */
 function main() {
+    console.log('Start Main Functie')
     answers = [];
     question = 0;
     subjectTitle.textContent = 'Start';
@@ -266,10 +280,10 @@ function result() {
     for (let i = 0; i < scores.length; i++) {
         scores[i].score = scores[i].score / totalScore * 100;
     };
-    /* a negative number if a is smaller than b – so a will be sorted to the left of b
-    * a positive number if a is bigger than b – so a will be sorted to the right of b
-    * zero if they are equal – so it doesn’t matter which one comes first 
-    */
+    //a negative number if a is smaller than b – so a will be sorted to the left of b
+    //a positive number if a is bigger than b – so a will be sorted to the right of b
+    //zero if they are equal – so it doesn’t matter which one comes first 
+   
     var highestScore = scores.sort((a, b) => b.score - a.score); 
     for (let d = 0; d < scores.length; d++) {
         if (scores[d].display) {
