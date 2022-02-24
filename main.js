@@ -157,11 +157,7 @@ function myAnswer(yourAnswer) {
     answers[question] = yourAnswer;
     question++;
     buttonKeepColor();
-    if (question != questions.length) {
-        updateSubject();
-    } else if (question == questions.length) {
-        chooseSubjects();
-    };
+    question == questions.length ? chooseSubjects() : updateSubject();
 };
 
 /** Makes checkboxes for every subject */
@@ -252,11 +248,7 @@ function match() {
             if (answers[m] == subjects[m].parties[i].position) {
                 for (let p = 0; p < scores.length; p++) {
                     if (subjects[m].parties[i].name == scores[p].name) {
-                        if (questions[m].important) {
-                            scores[p].score = scores[p].score + 2;
-                        } else {
-                            scores[p].score = scores[p].score + 1;
-                        };
+                        scores[p].score = questions[m].important ? scores[p].score + 2 : scores[p].score++;
                     };
                 };
             };
